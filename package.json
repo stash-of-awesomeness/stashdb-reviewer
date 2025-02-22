@@ -35,6 +35,8 @@
 	},
 	"dependencies": {
 		"@tailwindcss/forms": "^0.5.9",
-		"@tailwindcss/typography": "^0.5.15"
+		"@tailwindcss/typography": "^0.5.15",
+		"@urql/exchange-auth": "^2.2.0",
+		"@urql/svelte": "^4.2.2"
 	}
 }
