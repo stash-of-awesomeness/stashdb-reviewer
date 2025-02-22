@@ -1,16 +1,18 @@
 <script lang="ts">
-	import SideBySideCompare from "./SideBySideCompare.svelte";
+	import PerformerLink from "../links/PerformerLink.svelte";
+	import CreationRow from "./CreationRow.svelte";
+import SideBySideCompare from "./SideBySideCompare.svelte";
 
   let props = $props()
 </script>
 
 {#if props.performer != undefined && props.changes != undefined}
 <div class="grid grid-cols-12 gap-x-5 gap-y-2">
-  <div class="p-1 col-span-2 text-right">
+  <div class="p-1 col-span-full md:col-span-2 md:text-right">
     <strong>Modifying performer</strong>
   </div>
-  <div class="p-1 col-span-10">
-    {props.performer.name}
+  <div class="p-1 col-span-full md:col-span-10">
+    <PerformerLink performer={props.performer} />
   </div>
 
   {#if props.changes.name}
@@ -69,6 +71,60 @@
   {/if}
 </div>
 {:else}
-{props.performer}
-{props.changes.name}
+<div class="grid grid-cols-12 gap-x-5 gap-y-2">
+  {#if props.changes.name}
+  <CreationRow title="Name" change={props.changes.name} />
+  {/if}
+  {#if props.changes.disambiguation}
+  <CreationRow title="Disambiguation" change={props.changes.disambiguation} />
+  {/if}
+  {#if props.changes.added_aliases || props.changes.removed_aliases}
+  <CreationRow title="Aliases" items={props.changes.added_aliases} />
+  {/if}
+  {#if props.changes.gender}
+  <CreationRow title="Gender" change={props.changes.gender} />
+  {/if}
+  {#if props.changes.birthdate}
+  <CreationRow title="Birth date" change={props.changes.birthdate} />
+  {/if}
+  {#if props.changes.deathdate}
+  <CreationRow title="Death date" change={props.changes.deathdate} />
+  {/if}
+  {#if props.changes.height}
+  <CreationRow title="Height" change={props.changes.height} />
+  {/if}
+  {#if props.changes.weight}
+  <CreationRow title="Weight" change={props.changes.weight} />
+  {/if}
+  {#if props.changes.bra_size}
+  <CreationRow title="Bra size" change={props.changes.bra_size} />
+  {/if}
+  {#if props.changes.hip_size}
+  <CreationRow title="Hip size" change={props.changes.hip_size} />
+  {/if}
+  {#if props.changes.waist_size}
+  <CreationRow title="Wasit size" change={props.changes.waist_size} />
+  {/if}
+  {#if props.changes.breast_type}
+  <CreationRow title="Breast type" change={props.changes.breast_type} />
+  {/if}
+  {#if props.changes.ethnicity}
+  <CreationRow title="Ethnicity" change={props.changes.ethnicity} />
+  {/if}
+  {#if props.changes.country}
+  <CreationRow title="Country" change={props.changes.country} />
+  {/if}
+  {#if props.changes.added_tattoos || props.changes.removed_tattoos}
+  <CreationRow title="Tattoos" items={props.changes.added_tattoos} />
+  {/if}
+  {#if props.changes.added_piercings || props.changes.removed_piercings}
+  <CreationRow title="Piercings" items={props.changes.added_piercings} />
+  {/if}
+  {#if props.changes.added_urls || props.changes.removed_urls}
+  <CreationRow title="Links" items={props.changes.added_urls} />
+  {/if}
+  {#if props.changes.added_images || props.changes.removed_images}
+  <CreationRow title="Images" items={props.changes.added_images} />
+  {/if}
+</div>
 {/if}

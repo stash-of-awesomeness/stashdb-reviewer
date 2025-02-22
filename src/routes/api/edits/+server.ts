@@ -9,7 +9,7 @@ import { STASH_AUTH_TOKEN } from '$env/static/private'
 const client = new Client({
   url: 'https://stashdb.org/graphql',
   exchanges: [
-    cacheExchange,
+    // cacheExchange,
     authExchange(async utils => {
       return {
         addAuthToOperation(operation) {
@@ -475,7 +475,6 @@ export const GET: RequestHandler = async ({ request }) => {
       "sort": "CREATED_AT",
       "status": "PENDING",
       "voted": "NOT_VOTED",
-      "target_type": "PERFORMER",
     }
   })
 

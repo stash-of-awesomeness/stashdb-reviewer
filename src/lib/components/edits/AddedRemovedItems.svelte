@@ -1,11 +1,13 @@
 <script lang="ts">
-	import SiteLink from "../SiteLink.svelte";
+	import PerformerLink from "../links/PerformerLink.svelte";
+	import SiteLink from "../links/SiteLink.svelte";
+	import TagLink from "../links/TagLink.svelte";
 
   let props = $props()
 </script>
 
 {#if props.type == "URL"}
-<ul class="mt-1">
+<ul>
   {#each props.items as link}
   <li>
     <SiteLink link={link} />
@@ -13,7 +15,7 @@
   {/each}
 </ul>
 {:else if props.type == "Image"}
-<div class="grid grid-cols-5 gap-2">
+<div class="grid grid-cols-2 md:grid-cols-5 gap-2">
   {#each props.items as image}
   <div class="center">
     <img src={image.url} style="max-height: 150px; aspect-ratio: 544 / 817" alt="[performer]" />
@@ -22,7 +24,7 @@
   {/each}
   </div>
 {:else if props.type == "BodyModification"}
-<ul class="mt-1">
+<ul>
   {#each props.items as modification}
   <li>
     {modification.location}
@@ -30,6 +32,22 @@
   </li>
   {/each}
 </ul>
+{:else if props.type == "PerformerAppearance"}
+<ul>
+  {#each props.items as appearance}
+  <li>
+    {#if appearance.as}
+    {appearance.as} (<PerformerLink performer={appearance.performer} />)
+    {:else}
+    <PerformerLink performer={appearance.performer} />
+    {/if}
+  </li>
+  {/each}
+</ul>
+{:else if props.type == "Tag"}
+  {#each props.items as tag}
+  <TagLink tag={tag} />
+  {/each}
 {:else if props.type == "string"}
   {props.items.join(", ")}
 {/if}
